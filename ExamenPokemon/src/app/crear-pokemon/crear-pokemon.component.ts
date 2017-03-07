@@ -12,6 +12,7 @@ export class CrearPokemonComponent implements OnInit {
 
   private _parametros :any;
   nuevoPokemon={};
+
   pokemons:any=[
     {nombre:'Abra',
       imagen:'https://github.com/Oyam16/prueba-twj-UtrerasJavier/blob/master/appPokemon/assets/imagenes/pokemon/Abra.png'
@@ -47,8 +48,9 @@ export class CrearPokemonComponent implements OnInit {
       imagen:'https://github.com/Oyam16/prueba-twj-UtrerasJavier/blob/master/appPokemon/assets/imagenes/pokemon/Fearow.png'
     },
   ];
-  tipo1:any=[ 'Acero', 'Agua', 'Bicho', 'Dragón', 'Eléctrico', 'Fantasma', 'Fuego', 'Hada', 'Hielo', 'Lucha', 'Normal', 'Planta', 'Psíquico', 'Roca', 'Siniestro', 'Tierra', 'Veneno', 'Volador'];
-  tipo2:any=[ 'Acero', 'Agua', 'Bicho', 'Dragón', 'Eléctrico', 'Fantasma', 'Fuego', 'Hada', 'Hielo', 'Lucha', 'Normal', 'Planta', 'Psíquico', 'Roca', 'Siniestro', 'Tierra', 'Veneno', 'Volador'];
+  pokemonSeleccionado={nombre:'',imagen:''};
+  tipos1:any=[ 'Acero', 'Agua', 'Bicho', 'Dragón', 'Eléctrico', 'Fantasma', 'Fuego', 'Hada', 'Hielo', 'Lucha', 'Normal', 'Planta', 'Psíquico', 'Roca', 'Siniestro', 'Tierra', 'Veneno', 'Volador'];
+  tipos2:any=[ 'Acero', 'Agua', 'Bicho', 'Dragón', 'Eléctrico', 'Fantasma', 'Fuego', 'Hada', 'Hielo', 'Lucha', 'Normal', 'Planta', 'Psíquico', 'Roca', 'Siniestro', 'Tierra', 'Veneno', 'Volador'];
   disabledButtons = {
     NuevoPokemonFormSubmitButton: false
   };
@@ -67,22 +69,25 @@ export class CrearPokemonComponent implements OnInit {
   }
   crearPokemon(formulario: NgForm){
 
-    let nuevoAlbum={
+    console.log(formulario)
+
+
+
+    console.log(this.pokemonSeleccionado.nombre)
+    let nuevoPokemon={
       idEntrenador:this._parametros.idEntrenador,
       nombre:formulario.value.nombre,
       tipo1:formulario.value.tipo1,
       tipo2:formulario.value.tipo2,
-      imagen: formulario.value.imagen
+
 
     };
-    console.log(nuevoAlbum);
+    console.log(nuevoPokemon);
 
     this.disabledButtons.NuevoPokemonFormSubmitButton=true;
-    this._PokemonService.create(nuevoAlbum)
+    this._PokemonService.create(nuevoPokemon)
       .subscribe(
         (res)=>{
-
-
           this.nuevoPokemon={};
           this.disabledButtons.NuevoPokemonFormSubmitButton=false;
         },
